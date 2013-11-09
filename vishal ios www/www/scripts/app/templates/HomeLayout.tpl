@@ -4,8 +4,8 @@
 }}
 
   {macro main()}
-  <div id="wrapper">
-    <div id="scroller">
+  <div id="">
+    <div id="">
       <ul id="thelist">
         <li class="img">
           <div class="images"><span class="title">amadeus | <span class="titleName">Travel Now</span></span></div>
@@ -41,14 +41,14 @@
                 <input name="" type="checkbox" value="" id="mCondition">
                 <label for="mCondition">I have medical conditions</label>
               </div>
+              <div class="bot">
+              <span class="button" {on tap {fn: getDetails}/}>Recommend places</span>
+              </div>
             </div>
           </div>
         </li>
       </ul>
     </div>
-  </div>
-  <div id="footer">
-    <div class="button" id="recommend" {on tap {fn: getDetails}/}>Recommend places</div>
   </div>
   <div class="mask"></div>
   <div id="loading"></div>
@@ -72,7 +72,16 @@
   </div>
     </div>
 </div>
-  
+ <div class="popUp">
+  <div class="dialog">
+    {section {
+        id : "popuplist",
+        macro : {
+          name: "popupmacro"
+        }
+    }/}
+  </div>
+  </div> 
   {/macro}
  {macro cats()}
  {foreach cat in data.cats.lists}
@@ -83,6 +92,25 @@
 {/foreach}
  {/macro} 
   {macro popupmacro()}
-   {/macro}
+  {if this.data.result}
+  <div class="header">${this.data.result.title}<span class="close"></span></div>
+  <div class="content">${this.data.result.desc}</div>
+  <div>
+  {foreach listdata in this.data.result.list}
+    <div class="button" data="${listdata.title}">
+      <ul>
+        <li>${listdata.title}</li>
+        <li>${listdata.desc}</li>
+        <li class="icon"></li>
+      </ul>
+    </div>
+    {/foreach}
+  </div>
+  {else/}
+  <div class="header"><span class="close"></span></div>
+  <div class="content"></div>
+  
+  {/if}
+  {/macro}
 
 {/Template}
