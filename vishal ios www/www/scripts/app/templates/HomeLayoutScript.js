@@ -44,8 +44,11 @@ Aria.tplScriptDefinition({
 						 //
 		getDetails: function(){
 			var myData = this.collectData();
-			this.dummyPopupContent();			 
-			 //this.getPlaceInformation(myData);
+			if(myData){
+				this.dummyPopupContent();			 
+				 //this.getPlaceInformation(myData);
+				
+			}
 		},
 		dummyPopupContent: function(){
 			var myData = {};
@@ -335,16 +338,23 @@ Aria.tplScriptDefinition({
 				myData.tripType = "international";				
 			}
 			myData.catlist = new Array();
-			$( "input.catlist:checked" ).each(function( index ) {
-				var i = $( this ).prop("id")-1;
-				myData.catlist[index] = that.data.cats.lists[i].keyword;
-			});
-			myData.medlist = new Array();
-			if($('#mCondition').prop('checked')) {
-				$( "input.medlist:checked" ).each(function( index ) {
-					myData.medlist[index] = $( this ).val();
+			if($( "input.catlist:checked" ).length){
+				
+				$( "input.catlist:checked" ).each(function( index ) {
+					var i = $( this ).prop("id")-1;
+					myData.catlist[index] = that.data.cats.lists[i].keyword;
 				});
-			} 
+				myData.medlist = new Array();
+				if($('#mCondition').prop('checked')) {
+					$( "input.medlist:checked" ).each(function( index ) {
+						myData.medlist[index] = $( this ).val();
+					});
+				} 
+			} else{
+				alert("Please Select Travel Preference...!");
+				myData = false;
+			}
+
 			return myData;
 		}
 	}
