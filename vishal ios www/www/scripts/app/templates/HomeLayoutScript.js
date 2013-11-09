@@ -29,10 +29,10 @@ Aria.tplScriptDefinition({
 			$(".close2, .done").click(function(){
 				$(".mask, .popUp1").hide();
 			});
+			$(".close").click(function(){
+				$(".mask, .popUp").hide();
+			})
 
-//			 $("#recommend").click(function(){
-//				   that.getDetails();
-//				   })
 		},
 		changeAge: function(){
 			this.data.age = $("#age").val();
@@ -44,8 +44,44 @@ Aria.tplScriptDefinition({
 						 //
 		getDetails: function(){
 			var myData = this.collectData();
-						 
-			 this.getPlaceInformation(myData);
+			this.dummyPopupContent();			 
+			 //this.getPlaceInformation(myData);
+		},
+		dummyPopupContent: function(){
+			var myData = {};
+			myData.title = "Inspired by friends";
+			myData.desc = "The top three locations where several of your Facebook friends have recently enjoyed visiting,"
+				+"and we're offering you great deals and offers to try it yourself";
+			myData.list = new Array();
+			myData.list[0] = {};
+			myData.list[0].title = "Paris";
+			myData.list[0].desc = "Visited by 5 of your friends";
+			
+			myData.list[1] = {};
+			myData.list[1].title = "Nice";
+			myData.list[1].desc = "Visited by 3 of your friends";
+			
+			myData.list[2] = {};
+			myData.list[2].title = "New Delhi";
+			myData.list[2].desc = "Visited by 1 of your friends";
+			
+			this.$json.setValue(this.data, "result", myData);
+			this.$refresh({
+			    outputSection : "popuplist"
+			});			
+			$(".mask, .popUp").show();
+			 var btn = $(".button");
+			 var that = this
+			 btn.click(function(){
+					   
+					   var clickedCity = this.getAttribute("data");
+					   
+					   clickedCity = clickedCity.toLowerCase();
+					   clickedCity = clickedCity.replace(" ", "_");
+					   alert(clickedCity);
+					  // that.getPlaceDetail(clickedCity);
+					   })
+			
 		},
 						 
 		 //getPlaceInformation
@@ -117,6 +153,11 @@ Aria.tplScriptDefinition({
 
 		 
 				var myData = {};
+				//TODO: change text
+				myData.title = "Inspired by friends";
+				myData.desc = "The top three locations where several of your Facebook friends have recently enjoyed visiting,"
+					+"and we're offering you great deals and offers to try it yourself";
+				
 				myData.list = new Array();
 				
 				myData.list[0] = {};

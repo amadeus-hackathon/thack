@@ -72,7 +72,16 @@
   </div>
     </div>
 </div>
-  
+ <div class="popUp">
+  <div class="dialog">
+    {section {
+        id : "popuplist",
+        macro : {
+          name: "popupmacro"
+        }
+    }/}
+  </div>
+  </div> 
   {/macro}
  {macro cats()}
  {foreach cat in data.cats.lists}
@@ -83,6 +92,25 @@
 {/foreach}
  {/macro} 
   {macro popupmacro()}
-   {/macro}
+  {if this.data.result}
+  <div class="header">${this.data.result.title}<span class="close"></span></div>
+  <div class="content">${this.data.result.desc}</div>
+  <div>
+  {foreach listdata in this.data.result.list}
+    <div class="button" data="${listdata.title}">
+      <ul>
+        <li>${listdata.title}</li>
+        <li>${listdata.desc}</li>
+        <li class="icon"></li>
+      </ul>
+    </div>
+    {/foreach}
+  </div>
+  {else/}
+  <div class="header"><span class="close"></span></div>
+  <div class="content"></div>
+  
+  {/if}
+  {/macro}
 
 {/Template}
