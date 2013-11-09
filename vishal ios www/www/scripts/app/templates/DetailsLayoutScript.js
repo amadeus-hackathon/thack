@@ -1,14 +1,14 @@
 Aria.tplScriptDefinition({
     $classpath : "app.templates.DetailsLayoutScript",
 	$constructor: function(){
-	
 	},    
 	$prototype : {
 		$dataReady: function() {
-			console.log('Details Layout');
+			this.data.events = [1,2,3];
+			this.data.packages = [1,2,3,4,5];
 		},
 		
-		$displayReady: function() {
+		$displayReady: function(){
 			
 			var detTpl = this;
 			
@@ -16,25 +16,25 @@ Aria.tplScriptDefinition({
 			detTpl.data.myScroll = new iScroll('wrapper');
 			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
 			
-			// refresh iscroll whenever change in orientation
+			// reset scroller on orientation change
 			$(window).bind('orientationchange', function() {
 				detTpl.data.myScroll.refresh();
 			});
 			
 			// reset UI
-			detTpl.hidePopup();
-			detTpl.packageClicked();
+			this.hidePopup();
+			this.packageClicked();
 		},
 		
-		showPopup: function(events, args) {
-			$(".popup2, .mask").show();
+		packageClicked: function(event, args) {
+			$("#eventslist").hide();
+			$("#packageList").show();
+			$("#packages").addClass("selected");
+			$("#events").removeClass("selected");
+			this.data.myScroll.refresh()
 		},
-		
-		hidePopup: function(events, args) {
-			$(".popup2, .mask").hide();
-		},
-		
-		eventClicked: function(events, args) {
+	
+		eventClicked: function(event, args) {
 			$("#eventslist").show();
 			$("#packageList").hide();
 			$("#packages").removeClass("selected");
@@ -42,12 +42,12 @@ Aria.tplScriptDefinition({
 			this.data.myScroll.refresh()
 		},
 		
-		packageClicked: function(events, args) {
-			$("#eventslist").hide();
-			$("#packageList").show();
-			$("#packages").addClass("selected");
-			$("#events").removeClass("selected");
-			this.data.myScroll.refresh();
+		showPopup: function(event, args) {
+			$(".popup2, .mask").show();
+		},
+		
+		hidePopup: function(event, args) {
+			$(".popup2, .mask").hide();
 		}
  	}
 })

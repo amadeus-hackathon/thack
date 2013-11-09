@@ -26,128 +26,54 @@
 			  </div>
 			</li>
 			<li class="placeDetails events">
-			  <div class="tabs"><span class="selected" id="packages" {on tap {fn:'packageClicked'}/}>Packages</span><span id="events" {on tap {fn:'eventClicked'}/}>Events</span></div>
+			  <div class="tabs"><span class="selected" id="packages" {on click {fn:'packageClicked'}/}>Packages</span><span id="events" {on click {fn:'eventClicked'}/}>Events</span></div>
 			  <div class="container" id="packageList">
 				<div class="freeText">Packages dates from next month <span class="changeDate">Change dates</span> </div>
-				<div class="placeDescription packages">
-				  <div class="content placeDes">
-					<img src="img/Gulmarg1_81x64.jpg">
-					<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
-					<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
-					<table border="0" class="flightInfo">
-					  <tr>
-						<td class="departure">S2 100</td>
-						<td class="airline"></td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					  <tr>
-						<td class="arrival">S3 100</td>
-						<td class="airline"></td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					</table>
-					<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
-					<span class="bookButton" {on tap {fn:'showPopup'}/}>Book</span> 
-				  </div>
-				</div>
-				<div class="placeDescription packages">
-				  <div class="content placeDes">
-					<img src="img/Gulmarg1_81x64.jpg">
-					<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
-					<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
-					<table border="0" class="flightInfo">
-					  <tr>
-						<td class="departure">S2 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					  <tr>
-						<td class="arrival">S3 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					</table>
-					<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
-					<span class="bookButton" {on tap {fn:'showPopup'}/}>Book</span> 
-				  </div>
-				</div>
-				<div class="placeDescription packages">
-				  <div class="content placeDes">
-					<img src="img/Gulmarg1_81x64.jpg">
-					<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
-					<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
-					<table border="0" class="flightInfo">
-					  <tr>
-						<td class="departure">S2 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					  <tr>
-						<td class="arrival">S3 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					</table>
-					<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
-					<span class="bookButton" {on tap {fn:'showPopup'}/}>Book</span> 
-				  </div>
-				</div>
-				<div class="placeDescription packages">
-				  <div class="content placeDes">
-					<img src="img/Gulmarg1_81x64.jpg">
-					<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
-					<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
-					<table border="0" class="flightInfo">
-					  <tr>
-						<td class="departure">S2 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					  <tr>
-						<td class="arrival">S3 100</td>
-						<td>09:50 – 12:30</td>
-						<td>2h 40m, non-stop</td>
-					  </tr>
-					</table>
-					<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
-					<span class="bookButton" {on tap {fn:'showPopup'}/}>Book</span> 
-				  </div>
-				</div>
+				{foreach event in this.data.packages}
+					<div class="placeDescription packages">
+					  <div class="content placeDes">
+						<img src="img/Gulmarg1_81x64.jpg">
+						<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
+						<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
+						<table border="0" class="flightInfo">
+						  <tr>
+							<td class="departure">S2 100</td>
+							<td class="airline"></td>
+							<td>09:50 – 12:30</td>
+							<td>2h 40m, non-stop</td>
+						  </tr>
+						  <tr>
+							<td class="arrival">S3 100</td>
+							<td class="airline"></td>
+							<td>09:50 – 12:30</td>
+							<td>2h 40m, non-stop</td>
+						  </tr>
+						</table>
+						<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
+						<span class="bookButton" {on click {fn: 'showPopup'}/}>Book</span> 
+					  </div>
+					</div>
+				{/foreach}
 			  </div>
 			  <div class="container" id="eventslist">
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/Neil-Island2_81x64.jpg"> <span><strong class="name">Event 1</strong> </span> <span class="des">Oktoberfests have long been a part of German festivity. The Royal Orchid offers its own version of the celebration at its English pub, Geoffrey's. Geoffrey's at The Royal Orchid is transforming itself to provide a lively dining experience, in order to celebrate the historic Oktoberfest. The a la carte menu, specially designed for the festival, has a wide range of sizzlers that feature German favourites like sauerkraut, spaetzle, bratwurst and frikadelle will be served. Both vegetarian and non-vegetarian options will be available. Considering beer is a big part of the festival, the pub will serve a wide range of beer brands for guests to explore. These include Kingfisher, Fosters, Budweiser, Tuborg, Heineken, Carlsberg, Peroni, Corona, Christoffel, Orval and St Bernadus. </span> </div>
-				</div>
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/Pelling_81x64.jpg"> <span><strong  class="name">Ladies Night</strong></span> <span class="des"> Toxic Thursday at i-Bar tonight!! The Biggest, Boldest & Baddest girl's night out in town on a Thursday night!! Ladies get free drinks till 10:30pm, DJ Raghu got some fun new tunes lined up for tonight!! Call your friends, gang up and head over to i-Bar!! </span> </div>
-				</div>
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/04.jpg"> <span><strong  class="name">Ladies Night</strong></span> <span class="des"> Toxic Thursday at i-Bar tonight!! The Biggest, Boldest & Baddest girl's night out in town on a Thursday night!! Ladies get free drinks till 10:30pm, DJ Raghu got some fun new tunes lined up for tonight!! Call your friends, gang up and head over to i-Bar!! </span> </div>
-				</div>
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/04.jpg"> <span><strong  class="name">Ladies Night</strong></span> <span class="des"> Toxic Thursday at i-Bar tonight!! The Biggest, Boldest & Baddest girl's night out in town on a Thursday night!! Ladies get free drinks till 10:30pm, DJ Raghu got some fun new tunes lined up for tonight!! Call your friends, gang up and head over to i-Bar!! </span> </div>
-				</div>
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/04.jpg"> <span><strong  class="name">Ladies Night</strong></span> <span class="des"> Toxic Thursday at i-Bar tonight!! The Biggest, Boldest & Baddest girl's night out in town on a Thursday night!! Ladies get free drinks till 10:30pm, DJ Raghu got some fun new tunes lined up for tonight!! Call your friends, gang up and head over to i-Bar!! </span> </div>
-				</div>
-				<div class="placeDescription">
-				  <div class="content"> <img src="img/04.jpg"> <span><strong  class="name">Ladies Night</strong></span> <span class="des"> Toxic Thursday at i-Bar tonight!! The Biggest, Boldest & Baddest girl's night out in town on a Thursday night!! Ladies get free drinks till 10:30pm, DJ Raghu got some fun new tunes lined up for tonight!! Call your friends, gang up and head over to i-Bar!! </span> </div>
-				</div>
+				{foreach event in this.data.events}
+					<div class="placeDescription">
+						<div class="content"> <img src="img/Neil-Island2_81x64.jpg"> <span><strong class="name">Event 1</strong> </span> <span class="des">Oktoberfests have long been a part of German festivity. The Royal Orchid offers its own version of the celebration at its English pub, Geoffrey's. Geoffrey's at The Royal Orchid is transforming itself to provide a lively dining experience, in order to celebrate the historic Oktoberfest. The a la carte menu, specially designed for the festival, has a wide range of sizzlers that feature German favourites like sauerkraut, spaetzle, bratwurst and frikadelle will be served. Both vegetarian and non-vegetarian options will be available. Considering beer is a big part of the festival, the pub will serve a wide range of beer brands for guests to explore. These include Kingfisher, Fosters, Budweiser, Tuborg, Heineken, Carlsberg, Peroni, Corona, Christoffel, Orval and St Bernadus. </span> </div>
+					</div>
+				{/foreach}
 			  </div>
 			</li>
 		  </ul>
 		</div>
 	  </div>
 	  <div id="footer">
-		<div class="button"  onClick="window.open('search.html', '_self')">Book</div>
+		<div class="button">Book</div>
 	  </div>
 	</div>
 	<div class="mask"></div>
 	<div class="popup2">
 	  <div>
-		<div class="subHeader">More options <span class="close3" {on tap {fn: ''}/}></span></div>
+		<div class="subHeader">More options <span class="close3" {on click {fn: 'hidePopup'}/}></span></div>
 		<ul class="upsell">
 		  <li class="title">Winter Special - Sikkim Darjeeling Delight</li>
 		  <li class="offers">Between Jan 2014  to  Feb 2015 <span class="currency">INR 21000</span><span class="bookDeal">Proceed</span></li>
