@@ -4,8 +4,8 @@
 }}
 
   {macro main()}
-  <div id="wrapper">
-    <div id="scroller">
+  <div id="">
+    <div id="">
       <ul id="thelist">
         <li class="img">
           <div class="images"><span class="title">amadeus | <span class="titleName">Travel Now</span></span></div>
@@ -41,14 +41,14 @@
                 <input name="" type="checkbox" value="" id="mCondition">
                 <label for="mCondition">I have medical conditions</label>
               </div>
+              <div class="bot">
+              <span class="button" {on tap {fn: getDetails}/}>Recommend places</span>
+              </div>
             </div>
           </div>
         </li>
       </ul>
     </div>
-  </div>
-  <div id="footer">
-    <div class="button" id="recommend" {on tap {fn: getDetails}/}>Recommend places</div>
   </div>
   <div class="mask"></div>
   <div id="loading"></div>
