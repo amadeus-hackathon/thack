@@ -164,6 +164,10 @@ Aria.tplScriptDefinition({
 			}
 			
 			return "No description available";
+		},
+		
+		goBack: function(event, args) {
+			history.go(-1);
 		}
     }
 })

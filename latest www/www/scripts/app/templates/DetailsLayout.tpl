@@ -7,7 +7,7 @@
   {macro main()}
 	<div class="container" id="details">
 	  <div id="header">
-		<div class="backButton"><a href="index.html"></a></div>
+		<div class="backButton"><a href="javascript:void(0)" {on click {fn: 'goBack'}/}></a></div>
 	  </div>
 	  <div id="wrapper">
 		<div id="scroller">
