@@ -18,9 +18,9 @@ Aria.tplScriptDefinition({
 			
 			var detTpl = this;
 			
-			//PASS THE LAT & LON from HERE
-			//Pass Catogery also
-//			this.initialize('12', '77');
+		 //PASS THE LAT & LON from HERE
+		 //Pass Catogery also
+		 this.initialize('12.9562', '77.7019');
 
 			// create iscroll
 			detTpl.data.myScroll = new iScroll('wrapper');
@@ -61,15 +61,15 @@ Aria.tplScriptDefinition({
 			$(".popup2, .mask").hide();
 		},
 
-		initialize : function (myLat, myLng) {
+		 initialize : function (myLat, myLng) {
 		 //Health & Wellness - doctor|health|hospital|dentist
 		 //Religion & Spirtuality - hindu_temple|place_of_worship|mosque
 		 //Vacation | Exotic Vacations | New Places | Kids & family | Social Networking |Others - airport|bus_station|car_rental|taxi_stand|train_station
 		 //Sports | Adventures | Rest & relaxation - gym|spa
-						 
-		 var category = "airport|bus_station|car_rental|taxi_stand|train_station";
+		 
+		 var category = "doctor|health|hospital|dentist|airport|bus_station|car_rental|taxi_stand|train_station|hindu_temple|place_of_worship|mosque";
 		 var mapOptions = {
-		 zoom: 16,
+		 zoom: 10,
 		 center: new google.maps.LatLng(myLat, myLng),
 		 mapTypeId: google.maps.MapTypeId.ROADMAP
 		 };

@@ -124,14 +124,16 @@ Aria.tplScriptDefinition({
                             myData.list[0] = {};
                             myData.list[0].title = cityName;
                             myData.list[0].key = keyCityName;
-				   if(regionName == null)
-				   {
-				   myData.list[0].desc = countryName;
-				   }
-				   else
-				   {
-				   myData.list[0].desc = regionName + ", " + countryName;
-				   }
+						   myData.list[0].desc = countryName;
+
+//				   if(regionName == null)
+//				   {
+//				   myData.list[0].desc = countryName;
+//				   }
+//				   else
+//				   {
+//				   myData.list[0].desc = regionName + ", " + countryName;
+//				   }
 							myData.list[0].code = resp.deals[cityName].airport.code;
 
                             //2nd City
@@ -149,14 +151,15 @@ Aria.tplScriptDefinition({
                             myData.list[1] = {};
                             myData.list[1].title = cityName;
                             myData.list[1].key = keyCityName;
-				   if(regionName == null)
-				   {
-				   myData.list[1].desc = countryName;
-				   }
-				   else
-				   {
-				   myData.list[1].desc = regionName + ", " + countryName;
-				   }
+						   myData.list[1].desc = countryName;
+//				   if(regionName == null)
+//				   {
+//				   myData.list[1].desc = countryName;
+//				   }
+//				   else
+//				   {
+//				   myData.list[1].desc = regionName + ", " + countryName;
+//				   }
 							myData.list[1].code = resp.deals[cityName].airport.code;
 
                             //3rd City
@@ -174,14 +177,15 @@ Aria.tplScriptDefinition({
                             myData.list[2] = {};
                             myData.list[2].title = cityName;
                             myData.list[2].key = keyCityName;
-				   if(regionName == null)
-				   {
-				   myData.list[2].desc = countryName;
-				   }
-				   else
-				   {
-				   myData.list[2].desc = regionName + ", " + countryName;
-				   }
+						   myData.list[2].desc = countryName;
+//				   if(regionName == null)
+//				   {
+//				   myData.list[2].desc = countryName;
+//				   }
+//				   else
+//				   {
+//				   myData.list[2].desc = regionName + ", " + countryName;
+//				   }
 							myData.list[2].code = resp.deals[cityName].airport.code;
 
                         } catch (e) {

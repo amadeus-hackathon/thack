@@ -802,7 +802,7 @@ td.arrival {
 	position: absolute;
 	width: 100px;
 	height: 100px;
-	top: 70%;
+	top: 50%;
 	left: 45%;
 	z-index: 101;
 	display: none;
