@@ -876,3 +876,5 @@ span.bookDeal {
 	border-bottom:1px solid #ccc;
 	padding-bottom:40px
 }
+.placeDetails.events .content .airline img{ width:20px; height:20px}
+.placeDetails.events .content .airline{ vertical-align:middle}

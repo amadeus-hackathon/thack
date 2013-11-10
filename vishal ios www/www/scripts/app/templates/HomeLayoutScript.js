@@ -180,7 +180,7 @@ Aria.tplScriptDefinition({
         },
 
         //Display PLACES from SEASONAL
-        displayPlaceListPopUp: function (seasonalData) {
+        displayPlaceListPopUp: function (placespopupData) {
 
             // initialize if null
             if (json == null || json.home == null) {
@@ -188,10 +188,10 @@ Aria.tplScriptDefinition({
                     home: {}
                 };
             }
-
-            // set data for later reference
-            json.home.result = seasonalData;
-
+			
+			// set data for later reference
+            json.home.result = placespopupData;
+			
             // refresh popup
             this.$refresh({
                 outputSection: "popuplist"
