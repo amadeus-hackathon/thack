@@ -66,7 +66,7 @@
 								<span class="mainPrice">Rs.${aria.utils.Number.formatCurrency(pkg.pf, '#.##')}</span>
 								<span class="saving">Save Rs.${aria.utils.Number.formatCurrency(pkg.ps, '#.##')}</span>
 							</div>
-							<span class="bookButton" {on tap {fn: 'showPopup', args: aria.utils.Number.formatCurrency(pkg.pf, '#.##')}/}>Book</span> 
+							<span class="bookButton" {on tap {fn: 'showPopup', args: {nm: pkg.htNm, pc: aria.utils.Number.formatCurrency(pkg.pf, '#.##')}}/}>Book</span> 
 						  </div>
 						</div>
 					{/foreach}
@@ -76,9 +76,17 @@
 			  </div>
 			  <div class="container" id="eventslist">
 				{if this.data.events}
-					{foreach event in this.data.events}
+					{foreach event in this.data.clickedCity.events}
 						<div class="placeDescription">
-							<div class="content"> <img src="https://usercontent.googleapis.com/freebase/v1/image${this.data.placeImage}"> <span><strong>Place:</strong> ${data.placetitle}</span> </span><strong>Description:</strong>${data.details}</span></div>
+							<div class="content">
+								<img src="https://usercontent.googleapis.com/freebase/v1/image${this.data.placeImage}" alt="No Image">
+								<span>
+									<strong>Place: </strong> ${event.event_name}
+								</span> 
+								<span>
+									<strong>Description: </strong>${getDecodedText(event.description)}
+								</span>
+							</div>
 						</div>
 					{/foreach}
 				{else/}
@@ -98,8 +106,8 @@
 	  <div>
 		<div class="subHeader">More options <span class="close3" {on tap {fn: 'hidePopup'}/}></span></div>
 		<ul class="upsell">
-		  <li class="title">Winter Special - Sikkim Darjeeling Delight</li>
-		  <li class="offers">Between Jan 2014  to  Feb 2015 <span class="currency" id="popCurrency">INR 21000</span><span class="bookDeal">Proceed</span></li>
+		  <li class="title" id="hotelEL">Winter Special - Sikkim Darjeeling Delight</li>
+		  <li class="offers">Between Dec 2013  to  Jan 2014 <span class="currency" id="popCurrency">INR 21000</span><span class="bookDeal">Proceed</span></li>
 		  <li class="options subHeader1">More deals</li>
 		  <li class="offers bB">Between Feb 2014  to  Mar 2015 <span class="currency">INR 20000</span><span class="bookDeal">Book this trip</span></li>
 		  <li class="offers">Between Mar 2014  to  Apr 2015 <span class="currency">INR 19000</span><span class="bookDeal">Book this trip</span></li>

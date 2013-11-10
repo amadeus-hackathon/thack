@@ -879,3 +879,4 @@ span.bookDeal {
 }
 .placeDetails.events .content .airline img{ width:20px; height:20px}
 .placeDetails.events .content .airline{ vertical-align:middle}
+.errorMsg{ background:#ffe1e1; padding:5px; border:1px solid #f79292; margin:5px; font-size:.9em; }
