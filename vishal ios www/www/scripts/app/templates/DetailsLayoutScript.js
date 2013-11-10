@@ -47,6 +47,12 @@ Aria.tplScriptDefinition({
 		},
 		
 		showPopup: function(event, args) {
+			
+			// get currency element
+			var popEl = document.getElementById('popCurrency');
+			popEl.innerHTML = "INR " + args;
+			
+			// show popup
 			$(".popup2, .mask").show();
 		},
 		
