@@ -123,6 +123,7 @@ Aria.tplScriptDefinition({
                             myData.list[0].title = cityName;
                             myData.list[0].key = keyCityName;
                             myData.list[0].desc = regionName + ", " + countryName;
+							myData.list[0].code = resp.deals[cityName].airport.code;
 
                             //2nd City
                             cityName = cityValues[1];
@@ -140,6 +141,7 @@ Aria.tplScriptDefinition({
                             myData.list[1].title = cityName;
                             myData.list[1].key = keyCityName;
                             myData.list[1].desc = regionName + ", " + countryName;
+							myData.list[1].code = resp.deals[cityName].airport.code;
 
                             //3rd City
                             cityName = cityValues[2];
@@ -157,6 +159,7 @@ Aria.tplScriptDefinition({
                             myData.list[2].title = cityName;
                             myData.list[2].key = keyCityName;
                             myData.list[2].desc = regionName + ", " + countryName;
+							myData.list[2].code = resp.deals[cityName].airport.code;
 
                         } catch (e) {
                             console.log("Error: " + e.message);
@@ -193,29 +196,22 @@ Aria.tplScriptDefinition({
             this.$refresh({
                 outputSection: "popuplist"
             });
-
-            var btn = $(".button");
-            var that = this
-            btn.click(function () {
-
-                var clickedCity = this.getAttribute("data");
-
-                clickedCity = clickedCity.toLowerCase();
-                clickedCity = clickedCity.replace(" ", "_");
-
-                that.getPlaceDetail(clickedCity);
-            })
-
+			
             $("#loading, .mask").show();
             $("#loading").hide();
             $(".popUp, .dialog").show();
-
         },
-
+		
+		onCityClick: function(event, args) {
+			this.getPlaceDetail(args);
+		},
 
         //Get City Description + Image
-        getPlaceDetail: function (cityName) {
-
+        getPlaceDetail: function (cityInfo) {
+			
+			// update city name
+			var cityName = cityInfo.title.toLowerCase();
+            cityName = cityName.replace(" ", "_");
 
             var that = this;
             $(".popUp, .dialog").hide();
@@ -271,7 +267,10 @@ Aria.tplScriptDefinition({
                                         json.details.clickedCityDetails = cityData;
                                         var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1&adults1=1&chk_in=4%2F03%2F2014&from="
 											+ json.home.gpsCityCode 
-											+ "&city=New+Delhi&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0&to=DEL&infants=0";
+											+ "&city=" + cityInfo.title 
+											+ "&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0" 
+											+ "&to=" + cityInfo.code 
+											+ "&infants=0";
 
                                         $.ajax({
                                             url: tourPackageUrl,

@@ -816,3 +816,63 @@ td.arrival {
 	clear: both;
 	padding-top: 10px;
 }
+.popup2 {
+	position:absolute;
+	top:10%;
+	left:25%;
+	width:60%;
+	z-index:10001;
+	background:#fff;
+	border-radius:4px	
+}
+.popup2 .subHeader span.close3 {
+	background: url(../img/close.png) no-repeat 50% 50%;
+	background-size:30px 30px;
+	display:inline-block;
+	width:33px;
+	height:33px;
+	position:absolute;
+	right:5px;
+	top:2px;
+}
+.upsell {
+	border:1px solid #ccc
+}
+.upsell li {
+	padding:10px 5px;
+	position:relative
+}
+.upsell li.title {
+	font-weight:bold;
+	background:#ccc
+}
+.upsell li span.currency {
+	position:absolute;
+	right:10px;
+	top:5px;
+	font-weight:bold;
+	color:#0b659b
+}
+.upsell li.offers {
+	padding-bottom:40px;
+	font-size:.9em
+}
+.upsell li.offers .currency{ font-size:1.1em}
+span.bookDeal {
+	position:absolute;
+	right:10px;
+	bottom:5px;
+	background: -webkit-gradient(linear, 0 100%, 0 0, from(#01529f), color-stop(100%, #1875cd));
+	color:#fff;
+	text-align:center;
+	padding:7px 20px;
+	text-shadow:-1px -1px 1px #000;
+	position:absolute;
+	border-radius:5px;
+	margin-top:5px;
+	display:inline-block
+}
+.offers.bB {
+	border-bottom:1px solid #ccc;
+	padding-bottom:40px
+}

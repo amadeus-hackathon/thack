@@ -29,24 +29,26 @@
 			  <div class="tabs"><span class="selected" id="packages" {on click {fn:'packageClicked'}/}>Packages</span><span id="events" {on click {fn:'eventClicked'}/}>Events</span></div>
 			  <div class="container" id="packageList">
 				<div class="freeText">Packages dates from next month <span class="changeDate">Change dates</span> </div>
+				
+				{var flight = this.data.packages.flight/}
 				{foreach pkg in this.data.packages.hotels}
 					<div class="placeDescription packages">
 					  <div class="content placeDes">
-						<img src="img/Gulmarg1_81x64.jpg">
+						<img src="${pkg.htImg}">
 						<div class="packagetitle">${pkg.htNm}</div>
 						<div class="PackageDescription"><span class="days1">${pkg.ar}</span></div>
 						<table border="0" class="flightInfo">
 						  <tr>
-							<td class="departure">S2 100</td>
-							<td class="airline"></td>
-							<td>09:50 – 12:30</td>
-							<td>2h 40m, non-stop</td>
+							<td class="departure">${flight.al}</td>
+							<td class="airline">
+								<img src="${flight.img}"/>
+							</td>
+							<td>${flight.airline_name}</td>
 						  </tr>
 						  <tr>
-							<td class="arrival">S3 100</td>
-							<td class="airline"></td>
-							<td>09:50 – 12:30</td>
-							<td>2h 40m, non-stop</td>
+							<td class="departure">${flight.al}</td>
+							<td class="airline"><img src="${flight.img}"/></td>
+							<td>${flight.airline_name}</td>
 						  </tr>
 						</table>
 						<div class="price">

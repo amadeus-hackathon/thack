@@ -109,7 +109,7 @@
 			<div class="content">${result.desc}</div>
 			<div>
 				{foreach listdata in result.list}
-					<div class="button" data="${listdata.title}">
+					<div class="button" data="${listdata.title}" {on click {fn: 'onCityClick', args: listdata}/}>
 					  <ul>
 						<li>${listdata.title}</li>
 						<li>${listdata.desc}</li>
