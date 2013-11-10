@@ -70,14 +70,7 @@ Aria.tplScriptDefinition({
 
             var that = this;
             //EventBrite
-            var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future&keywords=" 
-				+ keywordData 
-				+ " " 
-				+ medListData 
-				+ regionName 
-				+ "&max_cities=3&max_events=5&lat=" 
-				+ window.localStorage.getItem("gpsLat") 
-				+ "&lng=" + window.localStorage.getItem("gpsLng")
+            var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future&keywords=" + keywordData + " " + medListData + regionName + "&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng")
 
             $.ajax({
                 url: url,
@@ -91,14 +84,16 @@ Aria.tplScriptDefinition({
                     if (textStatus == "success") {
                         //Response data
                         var resp = JSON.parse(responseData.responseText);
-						
-						if (json == null || json.home == null) {
-							json = {home: {}};
-						}
-						
-						// get city details from JSON
-						json.home.gpsCityName = resp.city.name;
-						json.home.gpsCityCode = resp.city.code;
+
+                        if (json == null || json.home == null) {
+                            json = {
+                                home: {}
+                            };
+                        }
+
+                        // get city details from JSON
+                        json.home.gpsCityName = resp.city.name;
+                        json.home.gpsCityCode = resp.city.code;
 
                         //Name of the cities
                         var cityValues = new Array();
@@ -113,13 +108,13 @@ Aria.tplScriptDefinition({
                             var keyCityName = cityName.replace(" ", "_");
                             keyCityName = keyCityName.toLowerCase();
                             resp.deals[cityName].name = cityName;
-							
+
                             // storage
-							json.home.city0 = JSON.stringify(resp.deals[cityName]);
-							json.home[keyCityName] = JSON.stringify(resp.deals[cityName]);
+                            json.home.city0 = resp.deals[cityName];
+                            json.home[keyCityName] = resp.deals[cityName];
 
                             var myData = {};
-							
+
                             //TODO: change text
                             myData.title = "Inspired by friends";
                             myData.desc = "The top three locations where several of your Facebook friends have recently enjoyed visiting," + "and we're offering you great deals and offers to try it yourself";
@@ -139,10 +134,10 @@ Aria.tplScriptDefinition({
                             keyCityName = cityName.replace(" ", "_");
                             keyCityName = keyCityName.toLowerCase();
                             resp.deals[cityName].name = cityName;
-							
-							json.home[keyCityName] = JSON.stringify(resp.deals[cityName]);
-							json.home.city1 = JSON.stringify(resp.deals[cityName].airport);
-							
+
+                            json.home[keyCityName] = resp.deals[cityName];
+                            json.home.city1 = resp.deals[cityName].airport;
+
                             myData.list[1] = {};
                             myData.list[1].title = cityName;
                             myData.list[1].key = keyCityName;
@@ -156,9 +151,9 @@ Aria.tplScriptDefinition({
                             keyCityName = cityName.replace(" ", "_");
                             keyCityName = keyCityName.toLowerCase();
                             resp.deals[cityName].name = cityName;
-							
-							json.home[keyCityName] = JSON.stringify(resp.deals[cityName]);
-							json.home.city2 = JSON.stringify(resp.deals[cityName].airport);
+
+                            json.home[keyCityName] = resp.deals[cityName];
+                            json.home.city2 = resp.deals[cityName].airport;
 
                             myData.list[2] = {};
                             myData.list[2].title = cityName;
@@ -185,20 +180,22 @@ Aria.tplScriptDefinition({
 
         //Display PLACES from SEASONAL
         displayPlaceListPopUp: function (seasonalData) {
-			
-			// initialize if null
-			if (json == null || json.home == null) {
-				json = {home: {}};
-			}
-			
-			// set data for later reference
-			json.home.result = seasonalData;
-			
-			// refresh popup
+
+            // initialize if null
+            if (json == null || json.home == null) {
+                json = {
+                    home: {}
+                };
+            }
+
+            // set data for later reference
+            json.home.result = seasonalData;
+
+            // refresh popup
             this.$refresh({
                 outputSection: "popuplist"
             });
-			
+
             var btn = $(".button");
             var that = this
             btn.click(function () {
@@ -221,6 +218,7 @@ Aria.tplScriptDefinition({
         //Get City Description + Image
         getPlaceDetail: function (cityName) {
 
+
             var that = this;
             $(".popUp, .dialog").hide();
             $("#loading, .mask").show();
@@ -228,70 +226,109 @@ Aria.tplScriptDefinition({
             //City Description
             var cityDescriptionUrl = "https://www.googleapis.com/freebase/v1/text/en/" + cityName;
 
-            $.ajax({
-                url: cityDescriptionUrl,
-                cache: true,
-                type: "GET",
-                processData: false,
-                dataType: "json",
-                crossDomain: "true",
-                complete: function (responseData, textStatus, jqXHR) {
+            try {
+                $.ajax({
+                    url: cityDescriptionUrl,
+                    cache: true,
+                    type: "GET",
+                    processData: false,
+                    dataType: "json",
+                    crossDomain: "true",
+                    complete: function (responseData, textStatus, jqXHR) {
 
-                    if (textStatus == "success") {
-                        var data = JSON.parse(responseData.responseText);
+                        if (textStatus == "success") {
+                            var data = JSON.parse(responseData.responseText);
 
-                        var cityDescription = data.result;
+                            var cityDescription = data.result;
 
-                        //City Image URL
-                        var imageIDUrl = "https://www.googleapis.com/freebase/v1/topic/en/" + cityName + "?filter=/image&limit=1";
 
-                        $.ajax({
-                            url: imageIDUrl,
-                            cache: true,
-                            type: "GET",
-                            processData: false,
-                            dataType: "json",
-                            crossDomain: "true",
-                            complete: function (responseData, textStatus, jqXHR) {
+                            //City Image URL
+                            var imageIDUrl = "https://www.googleapis.com/freebase/v1/topic/en/" + cityName + "?filter=/image&limit=1";
 
-                                if (textStatus == "success") {
-                                    var imageData = JSON.parse(responseData.responseText);
-                                    var cityImageID = imageData.id;
+                            $.ajax({
+                                url: imageIDUrl,
+                                cache: true,
+                                type: "GET",
+                                processData: false,
+                                dataType: "json",
+                                crossDomain: "true",
+                                complete: function (responseData, textStatus, jqXHR) {
 
-                                    //City information for DETAILS page
-                                    var cityData = {};
-                                    cityData.cityName = cityName;
-                                    cityData.desc = cityDescription;
-                                    cityData.imageID = cityImageID;
-									
-									// initialize if NULL
-									if (json.details == null) {
-										json.details = {};
-									}
-									
-									// get clicked city details
-									json.details.clickedCityDetails = cityData;
+                                    if (textStatus == "success") {
+                                        var imageData = JSON.parse(responseData.responseText);
+                                        var cityImageID = imageData.id;
 
+                                        //City information for DETAILS page
+                                        var cityData = {};
+                                        cityData.cityName = cityName;
+                                        cityData.desc = cityDescription;
+                                        cityData.imageID = cityImageID;
+
+                                        // initialize if NULL
+                                        if (json.details == null) {
+                                            json.details = {};
+                                        }
+
+                                        // get clicked city details
+                                        json.details.clickedCityDetails = cityData;
+                                        var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1" 
+											+ "&adults1=1&" + 
+											+ "chk_in=4%2F03%2F2014&from=" +
+											+ json.home.gpsCityCode 
+											+ "&city=New+Delhi" 
+											+ "&children1=0&return_date=8%2F03%2F2014" 
+											+ "&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014" + 
+											+ "&childs=0&to=DEL&infants=0";
+
+                                        $.ajax({
+                                            url: tourPackageUrl,
+                                            cache: true,
+                                            type: "GET",
+                                            processData: false,
+                                            dataType: "json",
+                                            crossDomain: "true",
+                                            complete: function (responseData, textStatus, jqXHR) {
+
+                                                if (textStatus == "success") {
+													
+													// get packages information
+                                                    var response = JSON.parse(responseData.responseText);
+													
+													// hide loading
+                                                    $("#loading, .mask").hide();
+
+                                                    // navigate to details page
+                                                    pageEngine.navigate({
+                                                        'pageId': 'DETAILS'
+                                                    })
+
+                                                }
+                                            },
+                                            error: function (responseData, textStatus, errorThrown) {
+                                                console.log('FAILEDS API CALL');
+                                                $("#loading, .mask").hide();
+                                            }
+                                        });
+                                    }
+                                },
+                                error: function (responseData, textStatus, errorThrown) {
+                                    console.log('POST failed.');
                                     $("#loading, .mask").hide();
 
-                                    //Navigation data for TPL
-                                    pageEngine.navigate({
-                                        "pageId": "DETAILS"
-                                    })
-
                                 }
-                            },
-                            error: function (responseData, textStatus, errorThrown) {
-                                console.log('FAILEDS API CALL');
-                            }
-                        });
-                    }
-                },
-                error: function (responseData, textStatus, errorThrown) {
-                    console.log('POST failed.');
-                }
+                            });
+                        }
+                    },
+                    error: function (responseData, textStatus, errorThrown) {
+                        console.log('FAILEDS API CALL');
+                        $("#loading, .mask").hide();
 
-            });
+                    }
+
+                });
+            } catch (e) {
+                console.log(e.message);
+            }
         },
 
         //Get Keywords + Criteria + Medical Stats + Place of travel
