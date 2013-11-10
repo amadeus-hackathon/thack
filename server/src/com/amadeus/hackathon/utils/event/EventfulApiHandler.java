@@ -138,7 +138,7 @@ public class EventfulApiHandler implements EventApiInterface {
 		// send description
 		if (event.get(IHackathonConstants.EVENT_DESCRIPTION) instanceof String) {
 			try {
-				processed.put(IHackathonConstants.EVENT_DESCRIPTION, URLEncoder.encode((String)event.get(IHackathonConstants.EVENT_DESCRIPTION),"UTF-8"));
+				processed.put(IHackathonConstants.EVENT_DESCRIPTION, URLEncoder.encode(event.getString(IHackathonConstants.EVENT_DESCRIPTION),"UTF-8"));
 			} catch (JSONException | UnsupportedEncodingException e) {
 				// log exception using log4j
 			}

@@ -144,9 +144,16 @@ public class ClearTripScrappingUtil {
 				}
 				
 				// get image for airline
-				if (minPriceCombo.has("al") && minPriceCombo.get("al") instanceof String) {
-					minPriceCombo.put("img", "http://www.cleartrip.com/images/air_logos/" + minPriceCombo.getString("al"));
-				}	
+				if (minPriceCombo != null) {
+					if (minPriceCombo.has("al") && minPriceCombo.get("al") instanceof String) {
+						minPriceCombo.put("img", "http://www.cleartrip.com/images/air_logos/" + minPriceCombo.getString("al") + ".gif");
+					}
+				} else {
+					minPriceCombo = new JSONObject();
+					minPriceCombo.put("al", "LH");
+					minPriceCombo.put("airline_name", "Lufthansa");
+					minPriceCombo.put("img", "http://www.cleartrip.com/images/air_logos/LH.gif");
+				}
 				
 				JSONObject result = new JSONObject();
 				result.put("hotels", packages);
@@ -178,10 +185,14 @@ public class ClearTripScrappingUtil {
 		if (ht.has("id") && ht.has("im") && ht.get("id") instanceof String && ht.get("im") instanceof String) {
 			String id = ht.getString("id");
 			StringBuilder url = new StringBuilder("http://www.cleartrip.com/places/hotels/");
-			url.append(id.substring(0, id.length() - 2));
-			url.append("/");
+			
+			if (id.length() > 4) { 
+				url.append(id.substring(0, 4));
+				url.append("/");
+			}
+			
 			url.append(id);
-			url.append("/");
+			url.append("/images/");
 			url.append(ht.getString("im"));
 			
 			// set the hotel image
