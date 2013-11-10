@@ -102,7 +102,10 @@ Aria.tplScriptDefinition({
 				var currentGPSCityAPTCode = resp.city.code;
 				window.localStorage.setItem("gpsCityCode", currentGPSCityAPTCode);
 				
-				//
+				if(resp.deals == null || resp.deals == "undefined" || resp.deals.length ==0){
+				alert("No Data fetch...");
+				return;
+				}
 				//Name of the cities
 				var cityValues = new Array();
 				cityValues = Object.keys(resp.deals);
@@ -289,7 +292,7 @@ Aria.tplScriptDefinition({
 					   
 					   
 					   $.ajax({
-							  url: cityDescriptionUrl,
+							  url: tourPackageUrl,
 							  cache: true,
 							  type: "GET",
 							  processData: false,
@@ -300,7 +303,7 @@ Aria.tplScriptDefinition({
 							  
 							  if(textStatus == "success")
 							  {
-							  alert(JSON.stringify(responseData));
+							  alert(JSON.stringify(responseData.responseText));
 							  
 							  $("#loading, .mask").hide();
 							  
