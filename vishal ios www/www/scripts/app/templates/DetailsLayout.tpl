@@ -1,6 +1,7 @@
 {Template {
   $classpath : "app.templates.DetailsLayout",
-  $hasScript: true
+  $hasScript: true,
+  $dependencies: ['aria.utils.Number']
 }}
 
   {macro main()}
@@ -28,12 +29,12 @@
 			  <div class="tabs"><span class="selected" id="packages" {on click {fn:'packageClicked'}/}>Packages</span><span id="events" {on click {fn:'eventClicked'}/}>Events</span></div>
 			  <div class="container" id="packageList">
 				<div class="freeText">Packages dates from next month <span class="changeDate">Change dates</span> </div>
-				{foreach event in this.data.packages}
+				{foreach pkg in this.data.packages.hotels}
 					<div class="placeDescription packages">
 					  <div class="content placeDes">
 						<img src="img/Gulmarg1_81x64.jpg">
-						<div class="packagetitle">Winter Special - Sikkim Darjeeling Delight</div>
-						<div class="PackageDescription"><span class="days1">6 days  - Gangtok, Pelling, Darjeelin and more</span></div>
+						<div class="packagetitle">${pkg.htNm}</div>
+						<div class="PackageDescription"><span class="days1">${pkg.ar}</span></div>
 						<table border="0" class="flightInfo">
 						  <tr>
 							<td class="departure">S2 100</td>
@@ -48,7 +49,12 @@
 							<td>2h 40m, non-stop</td>
 						  </tr>
 						</table>
-						<div class="price"> <span class="strikeOut">Rs.15,871 </span> <span class="mainPrice">Rs.15,433</span> <span class="saving">Save Rs.438</span> </div>
+						<div class="price">
+							{var orgPrice = pkg.pf + pkg.ps/}
+							<span class="strikeOut">Rs.${aria.utils.Number.formatCurrency(orgPrice, '#.##')}</span>
+							<span class="mainPrice">Rs.${aria.utils.Number.formatCurrency(pkg.pf, '#.##')}</span>
+							<span class="saving">Save Rs.${aria.utils.Number.formatCurrency(pkg.ps, '#.##')}</span>
+						</div>
 						<span class="bookButton" {on click {fn: 'showPopup'}/}>Book</span> 
 					  </div>
 					</div>

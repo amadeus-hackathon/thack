@@ -58,9 +58,8 @@ Aria.tplScriptDefinition({
             var regionName = "";
             if (tripType == "domestic") {
                 //TO GET THE GEO LOCATION COUNTRY
-                regionName = "&region=India";
+                regionName = "&location=India";
             }
-
 
             var categoryList = criteriaData.catlist;
             var keywordData = categoryList.join(" ");
@@ -69,8 +68,7 @@ Aria.tplScriptDefinition({
             var medListData = medList.join(" ");
 
             var that = this;
-            //EventBrite
-            var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future&keywords=" + keywordData + " " + medListData + regionName + "&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng")
+            var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future Date&keywords=" + keywordData + " || " + medListData + regionName + "&sort_order=popularity&sort_order=ascending&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng") + "&api_type=0";
 
             $.ajax({
                 url: url,
@@ -271,14 +269,9 @@ Aria.tplScriptDefinition({
 
                                         // get clicked city details
                                         json.details.clickedCityDetails = cityData;
-                                        var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1" 
-											+ "&adults1=1&" + 
-											+ "chk_in=4%2F03%2F2014&from=" +
+                                        var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1&adults1=1&chk_in=4%2F03%2F2014&from="
 											+ json.home.gpsCityCode 
-											+ "&city=New+Delhi" 
-											+ "&children1=0&return_date=8%2F03%2F2014" 
-											+ "&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014" + 
-											+ "&childs=0&to=DEL&infants=0";
+											+ "&city=New+Delhi&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0&to=DEL&infants=0";
 
                                         $.ajax({
                                             url: tourPackageUrl,
@@ -289,10 +282,12 @@ Aria.tplScriptDefinition({
                                             crossDomain: "true",
                                             complete: function (responseData, textStatus, jqXHR) {
 
-                                                if (textStatus == "success") {
-													
+                                                if (textStatus == "success" 
+													&& responseData.responseText != null 
+													&& responseData.responseText != '') {
+
 													// get packages information
-                                                    var response = JSON.parse(responseData.responseText);
+                                                    json.details.packages = JSON.parse(responseData.responseText);
 													
 													// hide loading
                                                     $("#loading, .mask").hide();

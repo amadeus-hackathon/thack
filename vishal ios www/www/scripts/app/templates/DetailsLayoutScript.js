@@ -5,16 +5,16 @@ Aria.tplScriptDefinition({
 	$prototype : {
 		$dataReady: function() {
 			this.data.events = [1,2,3];
-			this.data.packages = [1,2,3,4,5];
+			this.data.packages = json.details.packages;
 		},
 		
 		$displayReady: function(){
 			
 			var detTpl = this;
 			
-						 //PASS THE LAT & LON from HERE
-						 //Pass Catogery also
-			 this.initialize('12', '77');
+			//PASS THE LAT & LON from HERE
+			//Pass Catogery also
+			this.initialize('12', '77');
 
 			// create iscroll
 			detTpl.data.myScroll = new iScroll('wrapper');
@@ -54,7 +54,7 @@ Aria.tplScriptDefinition({
 			$(".popup2, .mask").hide();
 		},
 
-		 initialize : function (myLat, myLng) {
+		initialize : function (myLat, myLng) {
 		 //Health & Wellness - doctor|health|hospital|dentist
 		 //Religion & Spirtuality - hindu_temple|place_of_worship|mosque
 		 //Vacation | Exotic Vacations | New Places | Kids & family | Social Networking |Others - airport|bus_station|car_rental|taxi_stand|train_station
