@@ -32,7 +32,9 @@ Aria.tplScriptDefinition({
 			$(".close").click(function(){
 				$(".mask, .popUp").hide();
 			})
-
+//			 $("#recommend").click(function(){
+//				   that.getDetails();
+//				   })
 		},
 		changeAge: function(){
 			this.data.age = $("#age").val();
@@ -44,47 +46,8 @@ Aria.tplScriptDefinition({
 						 //
 		getDetails: function(){
 			var myData = this.collectData();
-			if(myData){
-				this.dummyPopupContent();			 
-				 //this.getPlaceInformation(myData);
-				
-			}
-		},
-		dummyPopupContent: function(){
-			var myData = {};
-			myData.title = "Inspired by friends";
-			myData.desc = "The top three locations where several of your Facebook friends have recently enjoyed visiting,"
-				+"and we're offering you great deals and offers to try it yourself";
-			myData.list = new Array();
-			myData.list[0] = {};
-			myData.list[0].title = "Paris";
-			myData.list[0].desc = "Visited by 5 of your friends";
-			
-			myData.list[1] = {};
-			myData.list[1].title = "Nice";
-			myData.list[1].desc = "Visited by 3 of your friends";
-			
-			myData.list[2] = {};
-			myData.list[2].title = "New Delhi";
-			myData.list[2].desc = "Visited by 1 of your friends";
-			
-			this.$json.setValue(this.data, "result", myData);
-			this.$refresh({
-			    outputSection : "popuplist"
-			});			
-			$(".mask, .popUp").show();
-			 var btn = $(".button");
-			 var that = this
-			 btn.click(function(){
-					   
-					   var clickedCity = this.getAttribute("data");
-					   
-					   clickedCity = clickedCity.toLowerCase();
-					   clickedCity = clickedCity.replace(" ", "_");
-					   alert(clickedCity);
-					  // that.getPlaceDetail(clickedCity);
-					   })
-			
+						 
+			 this.getPlaceInformation(myData);
 		},
 						 
 		 //getPlaceInformation
@@ -98,20 +61,23 @@ Aria.tplScriptDefinition({
 		 if(tripType == "domestic")
 		 {
 		 //TO GET THE GEO LOCATION COUNTRY
-		 regionName = "&region=India";
+		 regionName = "&location=India";
 		 }
 		 
 		 
 		 var categoryList = criteriaData.catlist;
-		 var keywordData = categoryList.join(" ");
+		 var keywordData = categoryList.join(" || ");
 		 
 		 var medList = criteriaData.medlist;
-		 var medListData = medList.join(" ");
+		 var medListData = medList.join(" || ");
 		 
 		 var that = this;
 		 //EventBrite
-		 var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future&keywords=" + keywordData + " " + medListData + regionName + "&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng") + "&api_type=1";
-			alert(url);
+//		 var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future&keywords=" + keywordData + " " + medListData + regionName + "&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng") + "&api_type=1";
+
+		//EventFul
+		 var url = "http://1.hackathon-amadeus.appspot.com/GetTopEvents?date=Future Date&keywords=" + keywordData + " || " + medListData + regionName + "&sort_order=popularity&sort_order=ascending&max_cities=3&max_events=5&lat=" + window.localStorage.getItem("gpsLat") + "&lng=" + window.localStorage.getItem("gpsLng") + "&api_type=0";
+		 alert(url);
 
 		 
 		 $.ajax({
@@ -136,9 +102,11 @@ Aria.tplScriptDefinition({
 				var currentGPSCityAPTCode = resp.city.code;
 				window.localStorage.setItem("gpsCityCode", currentGPSCityAPTCode);
 				
+				//
 				//Name of the cities
 				var cityValues = new Array();
 				cityValues = Object.keys(resp.deals);
+				//that.data.cityValues = cityValues;
 				
 				try
 				{
@@ -156,10 +124,12 @@ Aria.tplScriptDefinition({
 
 		 
 				var myData = {};
+				
 				//TODO: change text
-				myData.title = "Inspired by friends";
-				myData.desc = "The top three locations where several of your Facebook friends have recently enjoyed visiting,"
-					+"and we're offering you great deals and offers to try it yourself";
+				myData.title = "Well being";
+				myData.desc = "It seems you are likely to seek holidays with a specific focus, for example, wellbeing/medical tourism,"
+				+ "  learning/cultural holidays and ethical voyages."
+				+ " Here is a list of such great occasions which you would like to consider.";
 				
 				myData.list = new Array();
 				
@@ -211,12 +181,16 @@ Aria.tplScriptDefinition({
 				else
 				{
 				alert("FAILED IF");
+				$("#loading, .mask").hide();
+
 				}
 				},
 				error: function (responseData, textStatus, errorThrown)
 				{
 				console.log('POST failed.');
 				alert("FAILEDS API CALL");
+				$("#loading, .mask").hide();
+
 				}
 				});
 		 
@@ -231,12 +205,13 @@ Aria.tplScriptDefinition({
 		 this.$refresh({
 					   outputSection: "popuplist"
 					   });
+						 
 		 var btn = $(".button");
 		 var that = this
 		 btn.click(function(){
 				   
 				   var clickedCity = this.getAttribute("data");
-				   
+				   				   
 				   clickedCity = clickedCity.toLowerCase();
 				   clickedCity = clickedCity.replace(" ", "_");
 				   
@@ -253,6 +228,7 @@ Aria.tplScriptDefinition({
 		 //Get City Description + Image
 		 getPlaceDetail: function(cityName){
 		 
+						 
 		 var that = this;
 		 $(".popUp, .dialog").hide();
 		 $("#loading, .mask").show();
@@ -260,6 +236,7 @@ Aria.tplScriptDefinition({
 		 //City Description
 		 var cityDescriptionUrl = "https://www.googleapis.com/freebase/v1/text/en/" + cityName;
 		 
+						 try{
 		 $.ajax({
 				url: cityDescriptionUrl,
 				cache: true,
@@ -275,6 +252,7 @@ Aria.tplScriptDefinition({
 				var data = JSON.parse(responseData.responseText);
 				
 				var cityDescription = data.result;
+				
 				
 				//City Image URL
 				var imageIDUrl = "https://www.googleapis.com/freebase/v1/topic/en/" + cityName + "?filter=/image&limit=1";
@@ -301,19 +279,53 @@ Aria.tplScriptDefinition({
 					   cityData.imageID = cityImageID;
 					   
 					   window.localStorage.setItem("clickedCityDetails", JSON.stringify(cityData));
+					   //var toCityCode = that.data.cityValues[cityName].airport.code;
+					   //alert("toCityCode " + toCityCode);
 					   
-					   $("#loading, .mask").hide();
+					   //var toCityName = that.data.cityValues[cityName].airport.name;
+					   //alert("toCityName " + toCityName);
 					   
-					   //Navigation data for TPL
-					   this.data.home = myData;
-					   pageEngine.navigate({"pageId": "DETAILS"})
+					   var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1&adults1=1&chk_in=4%2F03%2F2014&from=" + window.localStorage.getItem("gpsCityCode") +"&city=New+Delhi&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0&to=DEL&infants=0";
+					   
+					   
+					   $.ajax({
+							  url: cityDescriptionUrl,
+							  cache: true,
+							  type: "GET",
+							  processData: false,
+							  dataType:"json",
+							  crossDomain:"true",
+							  complete: function (responseData, textStatus, jqXHR)
+							  {
+							  
+							  if(textStatus == "success")
+							  {
+							  alert(JSON.stringify(responseData));
+							  
+							  $("#loading, .mask").hide();
+							  
+							  //Navigation data for TPL
+							  //					   this.data.home = myData;
+							  pageEngine.navigate({'pageId': 'DETAILS'})
 
+							  }
+							  },
+							  error: function (responseData, textStatus, errorThrown)
+							  {
+							  console.log('POST failed.');
+							  alert("FAILEDS API CALL");
+							  $("#loading, .mask").hide();
+							  
+							  }
+							  });
 					   }
 					   },
 					   error: function (responseData, textStatus, errorThrown)
 					   {
 					   console.log('POST failed.');
 					   alert("FAILEDS API CALL");
+					   $("#loading, .mask").hide();
+
 					   }
 					   });
 				}
@@ -322,9 +334,14 @@ Aria.tplScriptDefinition({
 				{
 				console.log('POST failed.');
 				alert("FAILEDS API CALL");
+				$("#loading, .mask").hide();
+
 				}
 				
 				});
+						 }catch(e){
+						 alert(e.message);
+						 }
 		 },
 						 
 		 //Get Keywords + Criteria + Medical Stats + Place of travel
@@ -338,23 +355,16 @@ Aria.tplScriptDefinition({
 				myData.tripType = "international";				
 			}
 			myData.catlist = new Array();
-			if($( "input.catlist:checked" ).length){
-				
-				$( "input.catlist:checked" ).each(function( index ) {
-					var i = $( this ).prop("id")-1;
-					myData.catlist[index] = that.data.cats.lists[i].keyword;
+			$( "input.catlist:checked" ).each(function( index ) {
+				var i = $( this ).prop("id")-1;
+				myData.catlist[index] = that.data.cats.lists[i].keyword;
+			});
+			myData.medlist = new Array();
+			if($('#mCondition').prop('checked')) {
+				$( "input.medlist:checked" ).each(function( index ) {
+					myData.medlist[index] = $( this ).val();
 				});
-				myData.medlist = new Array();
-				if($('#mCondition').prop('checked')) {
-					$( "input.medlist:checked" ).each(function( index ) {
-						myData.medlist[index] = $( this ).val();
-					});
-				} 
-			} else{
-				alert("Please Select Travel Preference...!");
-				myData = false;
-			}
-
+			} 
 			return myData;
 		}
 	}

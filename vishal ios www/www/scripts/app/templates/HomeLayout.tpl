@@ -86,8 +86,10 @@
  {macro cats()}
  {foreach cat in data.cats.lists}
  {if data.age > cat.type}
+ <div class="catblock">
   <input class="catlist" name="" type="checkbox" value="${cat.id}" id="${cat.id}">
   <label for="${cat.id}">${cat.title}</label>
+  </div>
   {/if}
 {/foreach}
  {/macro} 

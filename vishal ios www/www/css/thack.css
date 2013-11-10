@@ -797,3 +797,22 @@ td.arrival {
 
 
 .popUp1 #footer{ position:absolute !important}
+#loading {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 70%;
+	left: 45%;
+	z-index: 101;
+	display: none;
+	background:url(../img/ajax-loader.gif) no-repeat;
+}
+.catblock{
+	display: inline-block;
+	width: 200px;
+	float: left;
+}
+.mConditions{
+	clear: both;
+	padding-top: 10px;
+}
