@@ -17,7 +17,7 @@ Aria.tplScriptDefinition({
 
             //PASS THE LAT & LON from HERE
             //Pass Catogery also
-            this.initialize('12.9562', '77.7019');
+            this.initialize(this.data.clickedCity.lat, this.data.clickedCity.lng);
 
             // create iscroll
             detTpl.data.myScroll = new iScroll('wrapper');
@@ -150,16 +150,20 @@ Aria.tplScriptDefinition({
 		
 		getDecodedText: function(data) {
 			
-			// format text
-			while (data.indexOf('+') != -1) {
-				data = data.replace('+', ' ');
+			if (data != null && data != '') {
+				// format text
+				while (data.indexOf('+') != -1) {
+					data = data.replace('+', ' ');
+				}
+				
+				while (data.indexOf('%') != -1) {
+					data = data.replace('%', '');
+				}
+				
+				return decodeURI(data);
 			}
 			
-			while (data.indexOf('%') != -1) {
-				data = data.replace('%', '');
-			}
-			
-			return decodeURI(data);
+			return "No description available";
 		}
     }
 })

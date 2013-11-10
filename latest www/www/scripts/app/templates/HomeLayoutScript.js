@@ -123,6 +123,7 @@ Aria.tplScriptDefinition({
                             myData.list[0].title = cityName;
                             myData.list[0].key = keyCityName;
                             myData.list[0].desc = countryName;
+							myData.list[0].tripType = tripType;
 							myData.list[0].events = resp.deals[cityName].events;
 							myData.list[0].lng = resp.deals[cityName].airport.lng;
 							myData.list[0].lat = resp.deals[cityName].airport.lat;
@@ -144,6 +145,7 @@ Aria.tplScriptDefinition({
                             myData.list[1].title = cityName;
                             myData.list[1].key = keyCityName;
                             myData.list[1].desc = countryName;
+							myData.list[1].tripType = tripType;
 							myData.list[1].events = resp.deals[cityName].events;
 							myData.list[1].lng = resp.deals[cityName].airport.lng;
 							myData.list[1].lat = resp.deals[cityName].airport.lat;
@@ -165,6 +167,7 @@ Aria.tplScriptDefinition({
                             myData.list[2].title = cityName;
                             myData.list[2].key = keyCityName;
                             myData.list[2].desc = countryName;
+							myData.list[2].tripType = tripType;
 							myData.list[2].events = resp.deals[cityName].events;
 							myData.list[2].lng = resp.deals[cityName].airport.lng;
 							myData.list[2].lat = resp.deals[cityName].airport.lat;
@@ -280,7 +283,17 @@ Aria.tplScriptDefinition({
                                         // get clicked city details
                                         json.details.clickedCityDetails = cityData;
 
-                                        var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1&adults1=1&chk_in=4%2F03%2F2014&from=" + json.home.gpsCityCode + "&city=" + cityInfo.title + "&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0" + "&to=" + cityInfo.code + "&infants=0";
+                                        var tourPackageUrl = "http://1.hackathon-amadeus.appspot.com/GetPackages?num_rooms=1&adults1=1&chk_in=4%2F03%2F2014&from=" 
+														+ json.home.gpsCityCode 
+														+ "&city=" + cityInfo.title 
+														+ "&children1=0&return_date=8%2F03%2F2014&chk_out=8%2F03%2F2014&adults=1&depart_date=4%2F03%2F2014&childs=0" 
+														+ "&to=" + cityInfo.code 
+														+ "&infants=0"
+										
+										// send hard coded country as US
+										if (cityInfo.tripType != 'domestic') {
+											tourPackageUrl += "&country=US";
+										}
 
                                         $.ajax({
                                             url: tourPackageUrl,
